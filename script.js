@@ -1,57 +1,77 @@
-function Jukebox() {
-	// this.artist = artist;
-	this.playSong = playsong;
-	this.pauseSong = pauseSong;
-	this.stopSong = stopSong;
-	this.getSong = getSong;
-	this.shuffleSong = shuffle;
-	this.switchSong = switchSong;
-}
-
-var audio = document.getElementsByClassName("audio")[0];
-audio.src = "lush.mp3"
-// Do i need variables (instances) for the above functions?(methods?)
-
-
-
-var song =('<source src=')+(songTitle)+('>')
-
-
-// var playButton = document.getElementsByClassName("play")[0];
-// var lushLight = document.getElementsByClassName("light")[1];
-// playButton.addEventListener("click", lushLight.play);
 
 var suzannJukebox = new Jukebox();
 
-function Song(fileName, artist) {
-	this.fileName = fileName;
-	this.artist = artist;
-}
+var audio = document.getElementsByClassName("audio")[0];
+var playButton = document.getElementsByClassName("play")[0];
+var pauseButton = document.getElementsByClassName("pause")[0];
+var stopButton = document.getElementsByClassName("stop")[0];
+var nextButton = document.getElementsByClassName("next")[0];
+var myAudio = document.getElementsByClassName("audio")[0];
 
-var hypocrite = new Song("hypocrite.mp3", "Lush")
-var light = new Song("lush.mp3")
 
-playButton.addEventListener("click", playSong)
-function playSong() {
-	audio.play();
-}
+var light = new Song("light.mp3");
+var ladykillers = new Song("ladykillers.mp3");
+var hypocrite = new Song("hypocrite.mp3"); 
 
-function Playlist(playlistName) {
-	this.playlistName = playlistName;
+
+playButton.addEventListener("click", suzannJukebox.playSong);
+pauseButton.addEventListener("click", suzannJukebox.pauseSong);
+stopButton.addEventListener("click", suzannJukebox.stopSong);
+nextButton.addEventListener("click", suzannJukebox.nextSong);
+
+window.addEventListener("load", suzannJukebox.playSong);
+
+suzannJukebox.addSong(hypocrite);
+suzannJukebox.addSong(ladykillers);
+suzannJukebox.addSong(light);
+
+
+function Jukebox() {
+	// this.artist = artist;
 	this.songList = [];
+	this.currentSong = 0;
+	this.playSong = playSong;
+	this.pauseSong = pauseSong;
+	this.stopSong = stopSong;
+	this.nextSong = nextSong;
+	// this.getSong = getSong;
+	// this.shuffleSong = shuffle;
+	// this.switchSong = switchSong;
+	
 	this.addSong = addSong;
+
+	function addSong(fileName) {
+	this.songList.push(fileName);
+	}
+
+	function playSong() {
+		var count = suzannJukebox.currentSong;
+		myAudio.src = suzannJukebox.songList[count].fileName;
+		// myArt.src = suzannJukebox.artList[count].fileName;
+		myAudio.play();
+		}
+
+	function pauseSong() {
+		myAudio.pause();
+		}
+
+	function stopSong() {
+		myAudio.load();
+	}
+	function nextSong() {
+		suzannJukebox.currentSong += 1;
+		if (suzannJukebox.currentSong < suzannJukebox.songList.length) {suzannJukebox.playSong()} else {suzannJukebox.currentSong = 0; suzannJukebox.playSong()};
+	}
+}
+
+function Song(fileName) {
+	this.fileName = fileName;
+	// this.artist = artist;
 }
 
 
-function addSong(fileName) {
-	this.songList.push(Song);
-}
 
 
-addSong("lush.mp3")
-
-
-
-var lush = new Playlist("lush.mp3"); 
+// var song =('<source src=')+(songTitle)+('>')
 
 
