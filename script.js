@@ -61,8 +61,9 @@ function Jukebox() {
 
 	function playSong() {
 		var count = suzannJukebox.currentSong;
+		var artCount = suzannJukebox.currentArt;
 		myAudio.src = suzannJukebox.songList[count].fileName;
-		myArt.innerHTML = suzannJukebox.artList[count].fileName;
+		myArt.innerHTML = suzannJukebox.artList[artCount].fileName;
 		myAudio.play();
 		}
 
