@@ -7,7 +7,7 @@ var pauseButton = document.getElementsByClassName("pause")[0];
 var stopButton = document.getElementsByClassName("stop")[0];
 var nextButton = document.getElementsByClassName("next")[0];
 var myAudio = document.getElementsByClassName("audio")[0];
-var myArt = document.getElementsByClassName("album-art")[0];
+var myArt = document.getElementsByClassName("album-art-image")[0];
 
 
 var light = new Song("light.mp3");
@@ -35,7 +35,6 @@ suzannJukebox.addArt(lushtwo);
 suzannJukebox.addArt(lushthree);
 
 function Jukebox() {
-	// this.artist = artist;
 	this.songList = [];
 	this.currentSong = 0;
 	this.playSong = playSong;
@@ -44,9 +43,6 @@ function Jukebox() {
 	this.nextSong = nextSong;
 	this.artList = [];
 	this.currentArt = 0;
-	// this.getSong = getSong;
-	// this.shuffleSong = shuffle;
-	// this.switchSong = switchSong;
 	
 	this.addSong = addSong;
 	this.addArt = addArt;
@@ -63,7 +59,7 @@ function Jukebox() {
 		var count = suzannJukebox.currentSong;
 		var artCount = suzannJukebox.currentArt;
 		myAudio.src = suzannJukebox.songList[count].fileName;
-		myArt.innerHTML = suzannJukebox.artList[artCount].fileName;
+		myArt.src = suzannJukebox.artList[artCount].fileName;
 		myAudio.play();
 		}
 
@@ -73,27 +69,41 @@ function Jukebox() {
 
 	function stopSong() {
 		myAudio.load();
-	}
+		}
+
 	function nextSong() {
 		suzannJukebox.currentSong += 1;
 		if (suzannJukebox.currentSong < suzannJukebox.songList.length) {
 			suzannJukebox.playSong()
-		} else {suzannJukebox.currentSong = 0; suzannJukebox.playSong()
-		};
+		} else {
+			suzannJukebox.currentSong = 0; suzannJukebox.playSong()
+		}
 	}
 }
 
+
+
 function Song(fileName) {
 	this.fileName = fileName;
-	// this.artist = artist;
-}
+	}
 
 function Art(fileName) {
 	this.fileName = fileName;
 }
+	
 
 
+// please ignore my scratch pad notes below
 
 // var song =('<source src=')+(songTitle)+('>')
 
+// this.getSong = getSong;
+	// this.shuffleSong = shuffle;
+	// this.switchSong = switchSong;
+	// if (suzannJukebox.currentArt < suzannJukebox.artList.length) {
+		// 	suzannJukebox.playSong()
+		// } else {suzannJukebox.currentArt = 0; suzannJukebox.playSong()}
+		// }
+	
 
+// .style.backgroundImage = "url('img_tree.png')"
